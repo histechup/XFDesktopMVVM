@@ -159,7 +159,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\XFDesktopMVVM\XFDesktopMVVM.csproj">
-      <Project>{1E521491-BB14-4AFB-ADD1-668C3D9175B0}</Project>
+      <Project>{7B49EBA8-3ACD-4753-9768-5B11B7784F6C}</Project>
       <Name>XFDesktopMVVM</Name>
     </ProjectReference>
   </ItemGroup>
