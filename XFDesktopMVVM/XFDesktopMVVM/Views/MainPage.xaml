@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XFDesktopMVVM.Views.MainPage">
+    <ContentPage.Content>
+
+        <Grid Padding="10,10,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="FakeNewsFeed"
+			   FontSize="Large" FontAttributes="Bold"
+			   TextColor="Black"
+			   Grid.Row="0" Grid.Column="0" />
+
+            <Button Text="Load Posts" 
+                    Command="{Binding UpdatePostsCommand}"
+                    HorizontalOptions="Center"
+                    WidthRequest="180" 
+                    Margin="0,20"
+                    Grid.Row="1"/>
+
+            <Grid Grid.Row="2">
+                <ListView ItemsSource="{Binding Posts}"
+             SelectedItem="{Binding SelectedPost}"
+                  IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+             VerticalOptions="FillAndExpand" 
+                  CachingStrategy="RecycleElement"
+             RefreshCommand="{x:Binding UpdatePostsCommand}">
+                    <ListView.Header>
+                        <Label Text="My Posts"/>
+                    </ListView.Header>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Padding="5,0,5,0"
+                             HorizontalOptions="StartAndExpand"
+                             Orientation="Horizontal">
+                                    <Image Source="{Binding ImageUrl}" WidthRequest="50"
+                                 HeightRequest="50" />
+                                    <Label Text="{Binding Title}"
+                                 VerticalTextAlignment="Center" FontSize="Small" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+						   IsVisible="{Binding IsBusy}"
+                            Color="Blue"
+						   HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                    <ActivityIndicator.HeightRequest>
+                        <OnPlatform x:TypeArguments="x:Double">
+                            <On Platform="iOS" Value="50"/>
+                            <On Platform="macOS" Value="20"/>
+                            <On Platform="Android" Value="50"/>
+                            <On Platform="UWP" Value="50"/>
+                            <On Platform="WPF" Value="20"/>
+                        </OnPlatform>
+                    </ActivityIndicator.HeightRequest>
+                </ActivityIndicator>
+
+            </Grid>
+
+         
+        </Grid>
+        
+        
+    
+    </ContentPage.Content>
+</ContentPage>
